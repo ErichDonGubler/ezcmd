@@ -97,7 +97,7 @@ impl EasyCommand {
     }
 
     fn output_impl(&mut self) -> Result<Output, io::Error> {
-        log::debug!("getting output {self}…");
+        log::debug!("getting output from {self}…");
         let output = self.inner.output()?;
         log::debug!("received exit code {:?} from {self}", output.status.code());
         Ok(output)
