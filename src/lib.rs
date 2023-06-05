@@ -39,6 +39,17 @@ impl EasyCommand {
         Self { inner: cmd }
     }
 
+    /// Like [`Self::new_with`], but optimized for ergonomic usage of an [`IntoIterator`] for
+    /// arguments.
+    pub fn simple<C, A, I>(cmd: C, args: I) -> Self
+    where
+        C: AsRef<OsStr>,
+        A: AsRef<OsStr>,
+        I: IntoIterator<Item = A>,
+    {
+        Self::new_with(cmd, |cmd| cmd.args(args))
+    }
+
     fn spawn_and_wait_impl(&mut self) -> Result<ExitStatus, SpawnAndWaitErrorKind> {
         log::debug!("spawning child process with {self}…");
 
