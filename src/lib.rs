@@ -51,7 +51,7 @@ impl EasyCommand {
     }
 
     fn spawn_and_wait_impl(&mut self) -> Result<ExitStatus, SpawnAndWaitErrorKind> {
-        log::debug!("spawning child process with {self}…");
+        log::trace!("spawning child process with {self}…");
 
         self.inner
             .spawn()
@@ -61,7 +61,7 @@ impl EasyCommand {
                 let status = child
                     .wait()
                     .map_err(|source| SpawnAndWaitErrorKind::WaitForExitCode { source })?;
-                log::debug!("received exit code {:?} from {self}", status.code());
+                log::trace!("received exit code {:?} from {self}", status.code());
                 Ok(status)
             })
     }
@@ -97,9 +97,9 @@ impl EasyCommand {
     }
 
     fn output_impl(&mut self) -> Result<Output, io::Error> {
-        log::debug!("getting output from {self}…");
+        log::trace!("getting output from {self}…");
         let output = self.inner.output()?;
-        log::debug!("received exit code {:?} from {self}", output.status.code());
+        log::trace!("received exit code {:?} from {self}", output.status.code());
         Ok(output)
     }
 
