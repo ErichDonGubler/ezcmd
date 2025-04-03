@@ -9,4 +9,4 @@ repository = "https://github.com/ErichDonGubler/ezcmd"
 [dependencies]
 log = "0.4.17"
 shell-words = "1.1.0"
-thiserror = "1.0.40"
+thiserror = "2.0.12"
